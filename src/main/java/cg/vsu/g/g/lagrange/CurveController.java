@@ -13,17 +13,12 @@ import java.util.LinkedList;
 public class CurveController {
     private final int WIDTH = 800;
     private final int HEIGHT = 600;
-
     @FXML
     AnchorPane anchorPane;
     @FXML
     private Canvas canvas = new Canvas(HEIGHT,WIDTH);
-
     LagrangePolynomial lagrangePolynomial = new LagrangePolynomial();
     private GraphicsContext graphicsContext;
-
-
-
     @FXML
     private void initialize() {
         anchorPane.prefWidthProperty().addListener((ov,oldValue,newValue) -> canvas.setWidth(newValue.doubleValue()));
@@ -36,7 +31,16 @@ public class CurveController {
         graphicsContext = canvas.getGraphicsContext2D();
         repaint();
     }
-
+    private void handlePrimaryClick(MouseEvent event) {
+        double clickPointX = event.getX();
+        double clickPointY = event.getY();
+        lagrangePolynomial.points.add(new Point (clickPointX,clickPointY));
+        graphicsContext.beginPath();
+        graphicsContext.moveTo(clickPointX,clickPointY);
+        graphicsContext.strokeOval(clickPointX,clickPointY,3,3);
+        graphicsContext.fill();
+        graphicsContext.closePath();
+    }
     private void repaint() {
         paint(graphicsContext);
     }
@@ -54,14 +58,5 @@ public class CurveController {
         graphicsContext.clearRect(0,0,WIDTH,HEIGHT);
     }
 
-    private void handlePrimaryClick(MouseEvent event) {
-        double clickPointX = event.getX();
-        double clickPointY = event.getY();
-        lagrangePolynomial.points.add(new Point (clickPointX,clickPointY));
-        graphicsContext.beginPath();
-        graphicsContext.moveTo(clickPointX,clickPointY);
-        graphicsContext.strokeOval(clickPointX,clickPointY,3,3);
-        graphicsContext.fill();
-        graphicsContext.closePath();
-    }
+
 }
