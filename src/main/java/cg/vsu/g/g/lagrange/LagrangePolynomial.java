@@ -9,13 +9,6 @@ import java.util.List;
 public class LagrangePolynomial {
 
     public ArrayList<Point> points = new ArrayList<>();
-    public boolean checkPoint (double xn, double yn) {
-        for (int i = 0; i < points.size(); i++) {
-            if(points.get(i).getX() == xn && points.get(i).getY() == yn)
-                return false;
-        }
-        return true;
-    }
 
     private double InterpolateLagrangePolynomial(double x0) {
         double y0 = 0;
@@ -39,15 +32,16 @@ public class LagrangePolynomial {
                     double xTemp = points.get(j).getX();
                     double yTemp = points.get(j).getY();
 
-                    points.get(j).x = points.get(j + 1).getX();
-                    points.get(j).y = points.get(j + 1).getY();
+                    points.get(j).x = points.get(j + 1).getX(); // мне очень не нравится обращение к полю,
+                    points.get(j).y = points.get(j + 1).getY(); // возможно, в дальнейшем я исправлю это
                     points.get(j + 1).x = xTemp;
                     points.get(j + 1).y = yTemp;
                 }
             }
         }
     }
-    public void drawGraphic (GraphicsContext g) {
+
+    public void drawGraphic(GraphicsContext g) {
         if (points.size() == 0)
             return;
         double ys;
@@ -63,5 +57,4 @@ public class LagrangePolynomial {
         g.stroke();
         g.closePath();
     }
-
 }

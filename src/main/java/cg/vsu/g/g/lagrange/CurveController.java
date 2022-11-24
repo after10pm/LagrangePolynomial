@@ -13,18 +13,14 @@ import java.util.LinkedList;
 public class CurveController {
     private final int WIDTH = 800;
     private final int HEIGHT = 600;
-    @FXML
-    private Label welcomeText;
+
     @FXML
     AnchorPane anchorPane;
     @FXML
     private Canvas canvas = new Canvas(HEIGHT,WIDTH);
 
     LagrangePolynomial lagrangePolynomial = new LagrangePolynomial();
-    LinkedList<Point> points = new LinkedList<>();
-    LinkedList<Double> xs = new LinkedList<>();
-    LinkedList<Double> ys = new LinkedList<>();
-    private GraphicsContext g;
+    private GraphicsContext graphicsContext;
 
 
 
@@ -32,17 +28,17 @@ public class CurveController {
     private void initialize() {
         anchorPane.prefWidthProperty().addListener((ov,oldValue,newValue) -> canvas.setWidth(newValue.doubleValue()));
         anchorPane.prefHeightProperty().addListener((ov, oldValue, newValue) -> canvas.setHeight(newValue.doubleValue()));
-
         canvas.setOnMouseClicked(event -> {
             switch (event.getButton()) {
-                case PRIMARY -> handlePrimaryClick(canvas.getGraphicsContext2D(), event);
+                case PRIMARY -> handlePrimaryClick(event);
             }
         });
-        g = canvas.getGraphicsContext2D();
+        graphicsContext = canvas.getGraphicsContext2D();
         repaint();
     }
+
     private void repaint() {
-        paint(g);
+        paint(graphicsContext);
     }
     protected void paint(GraphicsContext g) {
         g.clearRect(0, 0, WIDTH, HEIGHT);
@@ -55,19 +51,17 @@ public class CurveController {
     }
     public void delete(){
         lagrangePolynomial.points.clear();
-        g.clearRect(0,0,WIDTH,HEIGHT);
+        graphicsContext.clearRect(0,0,WIDTH,HEIGHT);
     }
 
-    private void handlePrimaryClick(GraphicsContext graphicsContext, MouseEvent event) {
-        final Point clickPoint = new Point(event.getX(), event.getY());
-        points.add(clickPoint);
-        double tempX = event.getX();
-        double tempY = event.getY();
-        lagrangePolynomial.points.add(new Point (tempX,tempY));
-        g.beginPath();
-        g.moveTo(tempX,tempY);
-        g.strokeOval(tempX,tempY,3,3);
-        g.fill();
-        g.closePath();
+    private void handlePrimaryClick(MouseEvent event) {
+        double clickPointX = event.getX();
+        double clickPointY = event.getY();
+        lagrangePolynomial.points.add(new Point (clickPointX,clickPointY));
+        graphicsContext.beginPath();
+        graphicsContext.moveTo(clickPointX,clickPointY);
+        graphicsContext.strokeOval(clickPointX,clickPointY,3,3);
+        graphicsContext.fill();
+        graphicsContext.closePath();
     }
 }
