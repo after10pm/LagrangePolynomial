@@ -12,5 +12,6 @@
 <AnchorPane fx:id="anchorPane" xmlns:fx="http://javafx.com/fxml"
             fx:controller="cg.vsu.g.g.lagrange.CurveController">
     <Canvas fx:id="canvas" width="800" height="600" AnchorPane.topAnchor="30.0"/>
-    <Button fx:id="executeFunctionButton" minWidth="30" text="Интерполировать" onAction="#computeFunction"/>
+    <Button fx:id="interpolateFunctionButton" minWidth="50" text="Интерполировать" onAction="#compute"/>
+    <Button fx:id="deleteFunctionButton" minWidth="50" text="Очистить" onAction="#delete" AnchorPane.topAnchor="40.0"/>
 </AnchorPane>

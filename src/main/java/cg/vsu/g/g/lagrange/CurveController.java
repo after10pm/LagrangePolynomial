@@ -8,9 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
 
 public class CurveController {
     private final int WIDTH = 800;
@@ -52,8 +50,12 @@ public class CurveController {
         lagrangePolynomial.drawGraphic(g);
 
     }
-    public void computeFunction(ActionEvent actionEvent) {
+    public void compute(ActionEvent actionEvent) {
         repaint();
+    }
+    public void delete(){
+        lagrangePolynomial.points.clear();
+        g.clearRect(0,0,WIDTH,HEIGHT);
     }
 
     private void handlePrimaryClick(GraphicsContext graphicsContext, MouseEvent event) {
