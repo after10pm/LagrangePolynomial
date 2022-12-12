@@ -1,17 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.*?>
+<?import javafx.scene.canvas.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
 
-<?import javafx.scene.control.Button?>
-
-
-<AnchorPane fx:id="anchorPane" xmlns:fx="http://javafx.com/fxml"
-            fx:controller="cg.vsu.g.g.lagrange.CurveController">
-    <Canvas fx:id="canvas" width="800" height="600" AnchorPane.topAnchor="30.0"/>
-    <Button fx:id="interpolateFunctionButton" minWidth="50" text="Интерполировать" onAction="#compute"/>
-    <Button fx:id="deleteFunctionButton" minWidth="50" text="Очистить" onAction="#delete" AnchorPane.topAnchor="40.0"/>
+<AnchorPane fx:id="anchorPane" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17.0.2-ea" fx:controller="cg.vsu.g.g.lagrange.CurveController">
+    <Canvas fx:id="canvas" height="600" width="800" AnchorPane.topAnchor="30.0" />
+    <Button fx:id="interpolateFunctionButton" minWidth="50" onAction="#compute" text="Интерполировать">
+      <graphic>
+         <AmbientLight focusTraversable="true" lightOn="false">
+            <effect>
+               <Bloom />
+            </effect>
+            <cursor>
+               <Cursor fx:constant="MOVE" />
+            </cursor>
+            <color>
+               <Color green="0.8273381590843201" blue="1.0" />
+            </color>
+         </AmbientLight>
+      </graphic></Button>
+    <Button fx:id="deleteFunctionButton" layoutY="25.0" minWidth="50" onAction="#delete" text="Очистить" textAlignment="CENTER" textFill="RED" AnchorPane.topAnchor="25.0">
+      <graphic>
+         <AmbientLight lightOn="true">
+            <color>
+               <Color red="0.6842105388641357" green="0.18166422843933105" blue="0.15521442890167236" />
+            </color>
+         </AmbientLight>
+      </graphic></Button>
 </AnchorPane>
